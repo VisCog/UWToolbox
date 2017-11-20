@@ -15,8 +15,8 @@ function [var] = params2var(params, freeList)
 %   var         Values extracted from the 'params' structure with field
 %               names (in order) from 'freeList'
 
-% Written by G.M Boynton, Summer of '00
-% Edited by Kelly Chang, February 10, 2017
+% Written by G.M Boynton - Summer of '00
+% Edited by Kelly Chang - February 10, 2017
 
 %% Input Control
 
@@ -25,20 +25,17 @@ if ischar(freeList)
 end
 
 varStr = regexprep(freeList, '(\(.*\))', '');
-numList = cellfun(@(x) regexprep(x,'[()]',''), regexp(freeList, '(\(.*\))', 'match'), 'UniformOutput', false);
+numList = regexp(freeList, '(\(.*\))', 'match');
 if ~all(ismember(varStr, fieldnames(params)))
     errFlds = setdiff(fieldnames(params), varStr);
     error('Unknown ''freeList'' parameters: %s', strjoin(errFlds, ', '));
 end
 
-%% Extract 'freeList' Fields from 'params'
+%% Extract 'freeList' Values from 'params' Structure
 
-var = cell(1,length(varStr));
+var = cell(1, length(varStr));
 for i = 1:length(varStr)
-    if isempty(numList{i})
-        var{i} = params.(varStr{i});
-    else
-        var{i} = params.(varStr{i})(str2num(char(numList{i})));
-    end
+    indx = str2vec(size(params.(varStr{i})), char(numList{i}));
+    var{i} = params.(varStr{i})(indx);
 end
 var = cell2mat(var);
