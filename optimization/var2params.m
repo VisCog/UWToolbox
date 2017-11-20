@@ -1,23 +1,26 @@
 function [params] = var2params(var, params, freeList)
 % [params] = var2params(var, params, freeList)
 %
-% Support function for 'fit.m'. Turns values 'var' into a field within
-% 'param' with a field name given in order from 'freeList'.
+% Support function for 'fit.m' and 'fitcon.m'. Turns varues 'varues' into a 
+% field within 'params' with a field name given in order from 'freeList'.
 %
 % Inputs:
-%   var         New values to be stored in the 'params' structure under
+%   var         New varues to be stored in the 'params' structure under
 %               field names (in order) from 'freeList'
 %
-%   params      A structure of parameter values with field names that
+%   params      A structure of parameter varues with field names that
 %               correspond with the parameter names in 'freeList'
 %
 %   freeList    Cell array containing list of parameter names (strings)
 %               that match the field names in 'params'
 %
 % Output:
-%   params      Same 'params' structure with parameter values as field
+%   params      Same 'params' structure with parameter varues as field
 %               names that correspond with the parameter names in
-%               'freeList' with the values from 'var'
+%               'freeList' with the varues from 'var'
+%
+% Notes:
+% - Dependencies: str2vec.m
 
 % Written by G.M. Boynton - Summer of '00
 % Edited by Kelly Chang - June 21, 2016
@@ -28,18 +31,13 @@ if ischar(freeList)
     freeList = {freeList};
 end
 
-%% Transforms 'var' into Structure 'params'
+%% Insert 'var' into 'params' Structure
 
 count = 1;
 varStr = regexprep(freeList, '(\(.*\))', '');
-numList = cellfun(@(x) regexprep(x,'[()]',''), regexp(freeList, '(\(.*\))', 'match'), 'UniformOutput', false);
-for i = 1:length(varStr)
-    if ~isempty(numList{i})
-        tmp = length(params.(varStr{i})(str2num(char(numList{i}))));
-        params.(varStr{i})(str2num(char(numList{i}))) = var(count:(count+tmp-1));
-    else
-        tmp = length(params.(varStr{i}));
-        params.(varStr{i}) = var(count:(count+tmp-1));
-    end
-    count = count + tmp;
+numList = regexp(freeList, '(\(.*\))', 'match');
+for i = 1:length(varStr) 
+    indx = str2vec(size(params.(varStr{i})), char(numList{i}));
+    params.(varStr{i})(indx) = var(count:(count + length(indx) - 1));
+    count = count + length(indx);
 end
