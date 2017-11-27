@@ -68,11 +68,11 @@ for i = 1:length(freeList)
             order = {'str2num(token{i}.l)' 'str2num(token{i}.r)' 'token{i}.m'};
         end
     end    
-    freeStr = eval(order{3}); 
-    varStr{i} = regexprep(freeStr, '(\(.*\))', '');
-    numList = char(regexp(freeStr, '(\(.*\))', 'match'));
-    indx = str2vec(params.(varStr{i}), numList);
-    var{i} = params.(varStr{i})(indx);
+    varStr{i} = eval(order{3}); 
+    freeStr = regexprep(varStr{i}, '(\(.*\))', '');
+    numList = char(regexp(varStr{i}, '(\(.*\))', 'match'));
+    indx = str2vec(params.(freeStr), numList);
+    var{i} = params.(freeStr)(indx);
     lb{i} = repmat(eval(order{1}),1,length(indx));
     ub{i} = repmat(eval(order{2}),1,length(indx));
 end
