@@ -1,8 +1,9 @@
 function [params] = var2params(var, params, freeList)
 % [params] = var2params(var, params, freeList)
 %
-% Support function for 'fit.m' and 'fitcon.m'. Turns varues 'varues' into a 
-% field within 'params' with a field name given in order from 'freeList'.
+% Turns varues 'varues' into a field within 'params' with a field name
+% given in order from 'freeList'. Support function for 'fit.m' and 
+% 'fitcon.m'. 
 %
 % Inputs:
 %   var         New varues to be stored in the 'params' structure under
@@ -37,7 +38,7 @@ count = 1;
 varStr = regexprep(freeList, '(\(.*\))', '');
 numList = regexp(freeList, '(\(.*\))', 'match');
 for i = 1:length(varStr) 
-    indx = str2vec(size(params.(varStr{i})), char(numList{i}));
+    indx = str2vec(params.(varStr{i}), char(numList{i}));
     params.(varStr{i})(indx) = var(count:(count + length(indx) - 1));
     count = count + length(indx);
 end

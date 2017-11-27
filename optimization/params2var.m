@@ -38,7 +38,7 @@ end
 
 var = cell(1, length(varStr));
 for i = 1:length(varStr)
-    indx = str2vec(size(params.(varStr{i})), char(numList{i}));
+    indx = str2vec(params.(varStr{i}), char(numList{i}));
     var{i} = params.(varStr{i})(indx);
 end
 var = cell2mat(var);

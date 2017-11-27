@@ -2,7 +2,7 @@ function [err] = fitFunction(var, funName, params, freeList, origVarargin)
 % [err] = fitFunction(var, funName, params, freeList, origVarargin)
 %
 % Evaluates the error value at minimum for the given 'funName' with
-% 'params' parameters. Support function for 'fit.m' & 'fitcon.m'
+% 'params' parameters. Support function for 'fit.m' and 'fitcon.m'.
 %
 % Inputs:
 %   var               Values used to calculate the error value, stored into
@@ -21,6 +21,9 @@ function [err] = fitFunction(var, funName, params, freeList, origVarargin)
 %
 % Output:
 %   err               Error value at minimum, numeric
+% 
+% Notes:
+% - Dependencies: var2params.m
 
 % Written by G.M Boynton, Summer of '00
 % Edited by Kelly Chang, February 10, 2017
