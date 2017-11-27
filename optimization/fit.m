@@ -1,22 +1,27 @@
 function [params,err] = fit(funName, params, freeList, varargin)
-% [params,err] = fit(funName, params, freeList, var1, var2, var3,...)
+% [params,err] = fit(funName, params, freeList, var1, var2,...)
 %
-% Helpful interface to matlab's 'fminsearch' function.
+% Helpful interface to MATLAB's 'fminsearch' function.
 %
 % Inputs:
 %   funName        Function to be optimized. Must have form
 %                  [err] = <funName>(params, var1, var2, ...)
 %
-%   params         A structure of with field names with corresponding
-%                  parameter values for fitted function. 'freeList'
-%                  parameters must only have a singular value per parameter
-%       options    A structure with pptions for fminsearch program
+%   params         A structure of with field names that correspond to 
+%                  parameter values for fitted function. Params are allowed
+%                  to be matrices.
+%       options    A structure with options for MATLAB's fminsearch program
 %                  (see OPTIMSET)
 %
 %   freeList       Cell array containing list of parameter names (strings)
-%                  to be free in fitting
+%                  to be free in fitting. Free strings can contain certain
+%                  values / ranges within the 'params' matrices. For 
+%                  example, the following are valid.
+%
+%                  {'x(1)','y(3:4)', 'z(1:2,4:5)'}
 %
 %   var<n>         Extra variables to be sent into fitted function
+%                  'funName'
 %
 % Outputs:
 %   params         A structure with best fitting parameters as fieldnames
