@@ -6,20 +6,25 @@ Kelly is currently in charge of organizing this toolbox, so email her if you hav
 
 ---
 
+# tutorials
+
+Collection HTML rendered tutorials for various implementations of toolbox scripts.
+
+[optimization](http://htmlpreview.github.io/?https://github.com/VisCog/UWToolbox/blob/master/tutorials/optimization/FitDemo.html)
+
+---
+
 # optimization
 
-fit - 
-params2var - 
+fit.m - Helpful interface to MATLAB's 'fminsearch' function. Performs a non-linear minimization algorithm.
 
-fitcon - 
-params2varcon - 
+fitcon.m - Helpful interface to MATLAB's 'fmincon' function. Performs a non-linear minimization algorithm within specified constrained boundaries. If problem does not require constraints, use fit.m for efficiency.
 
+Support Function / Dependencies:
+- fitFunction.m, params2var.m, params2varcon.m, var2params.m, str2vec.m
 
-fitFunction - 
-
-var2params - 
-
-test_functions
+FitDemo.m - raw fit/fitcon tutorial script
+- Dependencies: rosenbrock.n
 
 ---
 
