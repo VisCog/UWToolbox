@@ -35,6 +35,7 @@ end
 %% Assign 'var' into 'params' Structure
 
 count = 1;
+freeList = regexprep(freeList, '[= ]', '');
 varStr = regexprep(freeList, '(\(.*\))', '');
 numList = regexp(freeList, '(\(.*\))', 'match');
 for i = 1:length(varStr) 

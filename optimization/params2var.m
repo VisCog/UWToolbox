@@ -27,6 +27,7 @@ if ischar(freeList)
     freeList = {freeList};
 end
 
+freeList = regexprep(freeList, '[= ]', '');
 varStr = regexprep(freeList, '(\(.*\))', '');
 numList = regexp(freeList, '(\(.*\))', 'match');
 if ~all(ismember(varStr, fieldnames(params)))
