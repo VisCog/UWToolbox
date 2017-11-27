@@ -1,0 +1,438 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>FitDemo.m</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-26"><meta name="DC.source" content="FitDemo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>FitDemo.m</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Example 1: 2 Rosenbrock Function</a></li><li><a href="#2">Visualize the Rosenbrock Function as a Surface in 2D</a></li><li><a href="#4">Fitting the Rosenbrock</a></li><li><a href="#6">Constrained Fitting the Rosenbrock</a></li><li><a href="#7">Example 2: Fitting a Matrix</a></li><li><a href="#8">Visualize the Matrices as 2D Image</a></li><li><a href="#9">Fitting the Matrix</a></li><li><a href="#11">Fitting a Specific Range within a Matrix</a></li><li><a href="#12">Visualize the Matrices as 2D Image</a></li><li><a href="#13">Fitting a Specific Range within a Matrix</a></li><li><a href="#15">Constrained Fitting a Specific Range within a Matrix</a></li></ul></div><h2>Example 1: 2 Rosenbrock Function<a name="1"></a></h2><p>A classic 2-parameter function used to test nonlinear optimization routines is the 'Rosenbrock' function.  It has a shallow curved minimum that wreaks havoc on the simplest routines.  It has the form:</p><p><img src="FitDemo_eq16547700398660883783.png" alt="$$f(x,y) = (a-x)^2 + b(y-x^2)^2$$"></p><p>Where <img src="FitDemo_eq15186718596785023984.png" alt="$a = 1$"> and <img src="FitDemo_eq02483640441719736574.png" alt="$b = 100$"> by default. The minimum is zero at <img src="FitDemo_eq16346876791380022194.png" alt="$x = a$">, <img src="FitDemo_eq15431101851094060557.png" alt="$y = a^2$"></p><pre class="codeinput">p.x = -1;
+p.y = 2;
+f = rosenbrock(p);
+
+fprintf(<span class="string">'Rosenbrock at initial parameters:\nf(%g,%g) = %g\n'</span>, p.x, p.y, f);
+</pre><pre class="codeoutput">Rosenbrock at initial parameters:
+f(-1,2) = 104
+</pre><h2>Visualize the Rosenbrock Function as a Surface in 2D<a name="2"></a></h2><pre class="codeinput">[x,y] = meshgrid(linspace(-1.5,2,201),linspace(-.5,3,201));
+psurf.x = x;
+psurf.y = y;
+f = rosenbrock(psurf);
+
+figure(1);
+clf; hold <span class="string">on</span>;
+surf(psurf.x(1,:), psurf.y(:,1), f);
+shading <span class="string">interp</span>
+view(-40,20);
+
+xlabel(<span class="string">'x'</span>);
+ylabel(<span class="string">'y'</span>);
+</pre><img vspace="5" hspace="5" src="FitDemo_01.png" alt=""> <p>This builds a color map that roughly matches the image from the Wikipeida page:</p><pre class="codeinput">tmp = hot(400);
+cmap = flipud(tmp(1:256,:));
+cmap(1,:) = [0 0 1];
+colormap(cmap);
+</pre><img vspace="5" hspace="5" src="FitDemo_02.png" alt=""> <h2>Fitting the Rosenbrock<a name="4"></a></h2><p>We will use 'fit.m' to find the minimum. The initial values for the Rosenbrock will be from before.  First we'll define the parameters 'x' and 'y' in the structure that we want to be allowed to vary.  These are listed in a cell array of strings called 'freeList':</p><pre class="codeinput">freeList = {<span class="string">'x'</span>, <span class="string">'y'</span>};
+
+[pBest,fBest] = fit(<span class="string">'rosenbrock'</span>, p, freeList);
+
+fprintf(<span class="string">'The fitted minimum of the Rosenbrock:\nf(%g,%g) = %g\n'</span>, <span class="keyword">...</span>
+    pBest.x, pBest.y, fBest);
+</pre><pre class="codeoutput">The fitted minimum of the Rosenbrock:
+f(0.999991,0.999983) = 1.70617e-10
+</pre><p>Within rounding error, the minimum should be zero at (1,1). Here's the location of the minimum on the plot of the surface as a green marker:</p><pre class="codeinput">plot3(pBest.x, pBest.y, fBest, <span class="string">'ko'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'g'</span>);
+</pre><img vspace="5" hspace="5" src="FitDemo_03.png" alt=""> <h2>Constrained Fitting the Rosenbrock<a name="6"></a></h2><p>Using 'fitcon.m' to find the minimum with the same initial paramters, but the now parameter search space will be constrained by inequalities passed through in the 'freeList':</p><pre class="codeinput">freeList = {<span class="string">'x &gt; 2'</span>, <span class="string">'0 &lt; y &lt; 0.5'</span>};
+
+[pCon,fCon] = fitcon(<span class="string">'rosenbrock'</span>, p, freeList);
+
+fprintf(<span class="string">'The constrained fitted minimum of the Rosenbrock:\nf(%g,%g) = %g\n'</span>, <span class="keyword">...</span>
+    pCon.x, pCon.y, fCon);
+
+<span class="comment">% Here's the location of the constained minimum on the plot of the surface</span>
+<span class="comment">% as a yellow marker:</span>
+plot3(pCon.x, pCon.y, fCon, <span class="string">'ko'</span>, <span class="string">'MarkerFaceColor'</span>, <span class="string">'y'</span>);
+</pre><pre class="codeoutput">The constrained fitted minimum of the Rosenbrock:
+f(2,0.5) = 1226
+</pre><img vspace="5" hspace="5" src="FitDemo_04.png" alt=""> <h2>Example 2: Fitting a Matrix<a name="7"></a></h2><p>The 'fit.m' is also about the handle vectorized / matrix fitting.</p><p>For the sake of this example, let's pretend that you have a target matrix 'y', that you want to minimize the sum of squared error difference between another initial matrix 'x':</p><pre class="codeinput">params.y = magic(4);
+params.x = reshape(randperm(numel(params.y)), size(params.y));
+
+SSE = @(p) sum((p.y(:) - p.x(:)).^2);
+err = SSE(params);
+
+fprintf(<span class="string">'Current SSE between X and Y:\n%g\n'</span>, err);
+</pre><pre class="codeoutput">Current SSE between X and Y:
+544
+</pre><h2>Visualize the Matrices as 2D Image<a name="8"></a></h2><pre class="codeinput">f = figure(2); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(params.y);
+axis <span class="string">off</span>;
+title(<span class="string">'Target'</span>);
+
+subplot(1,2,2);
+imagesc(params.x);
+axis <span class="string">off</span>;
+title(sprintf(<span class="string">'Initial\nSSE = %g'</span>, err));
+</pre><img vspace="5" hspace="5" src="FitDemo_05.png" alt=""> <h2>Fitting the Matrix<a name="9"></a></h2><p>We will use 'fit.m' as before to find the minimum error (SSE) by allowing our initial matrix 'x' to be free to vary which keeping the target 'y' matrix constant.</p><pre class="codeinput">freeList = {<span class="string">'x'</span>};
+
+[pBest,fBest] = fit(SSE, params, freeList);
+</pre><pre class="codeoutput"> 
+Exiting: Maximum number of function evaluations has been exceeded
+         - increase MaxFunEvals option.
+         Current function value: 1.226931 
+
+</pre><p>Within fitting iterations, the fitted SSE should be closer to 0 SSE than the initial matrix. Visually this means that the fitted matrix should resemble the target matrix more than the initial matrix did.</p><pre class="codeinput">f = figure(3); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pBest.y);
+axis <span class="string">off</span>;
+title(<span class="string">'Target'</span>);
+
+subplot(1,2,2);
+imagesc(pBest.x);
+axis <span class="string">off</span>;
+title(sprintf(<span class="string">'Fitted\nSSE = %g'</span>, fBest));
+</pre><img vspace="5" hspace="5" src="FitDemo_06.png" alt=""> <h2>Fitting a Specific Range within a Matrix<a name="11"></a></h2><p>Let's say that only a specific range within the initial matrix 'x' should be fitted. 'fit.m' can also handle this through specification in 'freeList':</p><pre class="codeinput">nRow = 3; <span class="comment">% which row to mess with</span>
+params.x = params.y; <span class="comment">% resetting initial 'x' matrix,</span>
+params.x(nRow,:) = 1:size(params.y,2);
+</pre><h2>Visualize the Matrices as 2D Image<a name="12"></a></h2><p>The red boxes outline what should be the only row of difference between the two matrices.</p><pre class="codeinput">f = figure(4); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(params.y);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(params.y,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(<span class="string">'Target'</span>);
+
+subplot(1,2,2);
+imagesc(params.x);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(params.x,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(sprintf(<span class="string">'Initial\nSSE = %g'</span>, SSE(params)));
+</pre><img vspace="5" hspace="5" src="FitDemo_07.png" alt=""> <h2>Fitting a Specific Range within a Matrix<a name="13"></a></h2><p>We will use 'fit.m' as before to find the minimum error (SSE) by allowing our initial matrix 'x'to be free to vary ONLY in the changed row while keeping the target 'y' matrix constant.</p><pre class="codeinput">freeList = {sprintf(<span class="string">'x(%d,:)'</span>, nRow)}; <span class="comment">% {'x(3,:)'}</span>
+
+[pBest,fBest] = fit(SSE, params, freeList);
+</pre><p>Within fitting iterations and rounding error, the fitted SSE should be 0. Visually, the only row that values have changed is the one we previously specified (highlighted in the red rectangle).</p><pre class="codeinput">f = figure(5); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pBest.y);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(pBest.y,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(<span class="string">'Target'</span>);
+
+subplot(1,2,2);
+imagesc(pBest.x);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(pBest.x,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(sprintf(<span class="string">'Fitted\nSSE = %g'</span>, fBest));
+</pre><img vspace="5" hspace="5" src="FitDemo_08.png" alt=""> <h2>Constrained Fitting a Specific Range within a Matrix<a name="15"></a></h2><p>'fitcon.m' is also able to specify a certain range within the matrix to fit as well as constrain the parameter search space with the inequalities passed through in the 'freeList':</p><pre class="codeinput">freeList = {sprintf(<span class="string">'0 &lt; x(%d,:) &lt; 8'</span>, nRow)}; <span class="comment">% {'0 &lt; x(3,:) &lt; 8'}</span>
+
+[pCon,fCon] = fitcon(SSE, params, freeList);
+
+f = figure(6); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pCon.y);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(pCon.y,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(<span class="string">'Target'</span>);
+
+subplot(1,2,2);
+imagesc(pCon.x);
+rectangle(<span class="string">'Position'</span>, [0.5 nRow-0.5 size(pCon.x,2) 1], <span class="keyword">...</span>
+    <span class="string">'EdgeColor'</span>, <span class="string">'r'</span>, <span class="string">'LineWidth'</span>, 2);
+axis <span class="string">off</span>;
+title(sprintf(<span class="string">'Constrained Fitted\nSSE = %g'</span>, fCon));
+</pre><img vspace="5" hspace="5" src="FitDemo_09.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% FitDemo.m
+%
+
+%% Example 1: 2 Rosenbrock Function
+%
+% A classic 2-parameter function used to test nonlinear optimization
+% routines is the 'Rosenbrock' function.  It has a shallow curved minimum
+% that wreaks havoc on the simplest routines.  It has the form:
+%
+% $$f(x,y) = (a-x)^2 + b(y-x^2)^2$$
+%
+% Where $a = 1$ and $b = 100$ by default.
+% The minimum is zero at $x = a$, $y = a^2$
+
+p.x = -1;
+p.y = 2;
+f = rosenbrock(p);
+
+fprintf('Rosenbrock at initial parameters:\nf(%g,%g) = %g\n', p.x, p.y, f);
+
+%% Visualize the Rosenbrock Function as a Surface in 2D
+
+[x,y] = meshgrid(linspace(-1.5,2,201),linspace(-.5,3,201));
+psurf.x = x;
+psurf.y = y;
+f = rosenbrock(psurf);
+
+figure(1);
+clf; hold on;
+surf(psurf.x(1,:), psurf.y(:,1), f);
+shading interp
+view(-40,20);
+
+xlabel('x');
+ylabel('y');
+
+%%
+% This builds a color map that roughly matches the image from the Wikipeida
+% page:
+
+tmp = hot(400);
+cmap = flipud(tmp(1:256,:));
+cmap(1,:) = [0 0 1];
+colormap(cmap);
+
+%% Fitting the Rosenbrock 
+%
+% We will use 'fit.m' to find the minimum. The initial values for the
+% Rosenbrock will be from before.  First we'll define the parameters 'x' 
+% and 'y' in the structure that we want to be allowed to vary.  These are
+% listed in a cell array of strings called 'freeList':
+
+freeList = {'x', 'y'};
+
+[pBest,fBest] = fit('rosenbrock', p, freeList);
+
+fprintf('The fitted minimum of the Rosenbrock:\nf(%g,%g) = %g\n', ...
+    pBest.x, pBest.y, fBest);
+
+%%
+% Within rounding error, the minimum should be zero at (1,1). Here's the
+% location of the minimum on the plot of the surface as a green marker:
+
+plot3(pBest.x, pBest.y, fBest, 'ko', 'MarkerFaceColor', 'g');
+
+%% Constrained Fitting the Rosenbrock
+%
+% Using 'fitcon.m' to find the minimum with the same initial paramters, but
+% the now parameter search space will be constrained by inequalities passed 
+% through in the 'freeList':
+
+freeList = {'x > 2', '0 < y < 0.5'};
+
+[pCon,fCon] = fitcon('rosenbrock', p, freeList);
+
+fprintf('The constrained fitted minimum of the Rosenbrock:\nf(%g,%g) = %g\n', ...
+    pCon.x, pCon.y, fCon);
+
+% Here's the location of the constained minimum on the plot of the surface 
+% as a yellow marker:
+plot3(pCon.x, pCon.y, fCon, 'ko', 'MarkerFaceColor', 'y');
+
+%% Example 2: Fitting a Matrix
+%
+% The 'fit.m' is also about the handle vectorized / matrix fitting. 
+%
+% For the sake of this example, let's pretend that you have a target matrix
+% 'y', that you want to minimize the sum of squared error difference
+% between another initial matrix 'x':
+
+params.y = magic(4);
+params.x = reshape(randperm(numel(params.y)), size(params.y));
+
+SSE = @(p) sum((p.y(:) - p.x(:)).^2);
+err = SSE(params);
+
+fprintf('Current SSE between X and Y:\n%g\n', err);
+
+%% Visualize the Matrices as 2D Image
+
+f = figure(2); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(params.y);
+axis off;
+title('Target');
+
+subplot(1,2,2);
+imagesc(params.x);
+axis off;
+title(sprintf('Initial\nSSE = %g', err));
+
+%% Fitting the Matrix
+%
+% We will use 'fit.m' as before to find the minimum error (SSE) by allowing
+% our initial matrix 'x' to be free to vary which keeping the target 'y'
+% matrix constant.
+
+freeList = {'x'};
+
+[pBest,fBest] = fit(SSE, params, freeList);
+ 
+%%
+% Within fitting iterations, the fitted SSE should be closer to 0 SSE than  
+% the initial matrix. Visually this means that the fitted matrix should 
+% resemble the target matrix more than the initial matrix did. 
+
+f = figure(3); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pBest.y);
+axis off;
+title('Target');
+
+subplot(1,2,2);
+imagesc(pBest.x);
+axis off;
+title(sprintf('Fitted\nSSE = %g', fBest));
+
+%% Fitting a Specific Range within a Matrix 
+%
+% Let's say that only a specific range within the initial matrix 'x' should
+% be fitted. 'fit.m' can also handle this through specification in
+% 'freeList':
+
+nRow = 3; % which row to mess with
+params.x = params.y; % resetting initial 'x' matrix,
+params.x(nRow,:) = 1:size(params.y,2); 
+
+%% Visualize the Matrices as 2D Image
+% 
+% The red boxes outline what should be the only row of difference between
+% the two matrices.
+
+f = figure(4); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(params.y);
+rectangle('Position', [0.5 nRow-0.5 size(params.y,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title('Target');
+
+subplot(1,2,2);
+imagesc(params.x);
+rectangle('Position', [0.5 nRow-0.5 size(params.x,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title(sprintf('Initial\nSSE = %g', SSE(params)));
+
+%% Fitting a Specific Range within a Matrix
+%
+% We will use 'fit.m' as before to find the minimum error (SSE) by allowing
+% our initial matrix 'x'to be free to vary ONLY in the changed row while 
+% keeping the target 'y' matrix constant.
+
+freeList = {sprintf('x(%d,:)', nRow)}; % {'x(3,:)'}
+
+[pBest,fBest] = fit(SSE, params, freeList);
+
+%%
+% Within fitting iterations and rounding error, the fitted SSE should be 0.
+% Visually, the only row that values have changed is the one we previously
+% specified (highlighted in the red rectangle).
+
+f = figure(5); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pBest.y);
+rectangle('Position', [0.5 nRow-0.5 size(pBest.y,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title('Target');
+
+subplot(1,2,2);
+imagesc(pBest.x);
+rectangle('Position', [0.5 nRow-0.5 size(pBest.x,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title(sprintf('Fitted\nSSE = %g', fBest));
+
+%% Constrained Fitting a Specific Range within a Matrix
+%
+% 'fitcon.m' is also able to specify a certain range within the matrix to 
+% fit as well as constrain the parameter search space with the inequalities
+% passed through in the 'freeList':
+
+freeList = {sprintf('0 < x(%d,:) < 8', nRow)}; % {'0 < x(3,:) < 8'}
+
+[pCon,fCon] = fitcon(SSE, params, freeList);
+
+f = figure(6); clf;
+f.Position = [230 558 978 420];
+subplot(1,2,1);
+imagesc(pCon.y);
+rectangle('Position', [0.5 nRow-0.5 size(pCon.y,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title('Target');
+
+subplot(1,2,2);
+imagesc(pCon.x);
+rectangle('Position', [0.5 nRow-0.5 size(pCon.x,2) 1], ...
+    'EdgeColor', 'r', 'LineWidth', 2);
+axis off;
+title(sprintf('Constrained Fitted\nSSE = %g', fCon));
+
+##### SOURCE END #####
+--></body></html>
