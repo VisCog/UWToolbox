@@ -31,7 +31,7 @@ if ischar(freeList)
     freeList = {freeList};
 end
 
-%% Insert 'var' into 'params' Structure
+%% Assign 'var' into 'params' Structure
 
 count = 1;
 varStr = regexprep(freeList, '(\(.*\))', '');

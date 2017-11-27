@@ -2,7 +2,7 @@ function [var] = params2var(params, freeList)
 % [var] = params2var(params, freeList)
 %
 % Extracts 'freeList' fields from 'params' structure and outputs into a row
-% vector 'var'. Support function for 'fit.m'
+% vector 'var'. Support function for 'fit.m' and 'fitcon.m'.
 % 
 % Inputs:
 %   params      A structure of parameter values with field names that
@@ -14,6 +14,9 @@ function [var] = params2var(params, freeList)
 % Output:
 %   var         Values extracted from the 'params' structure with field
 %               names (in order) from 'freeList'
+%
+% Notes:
+% - Dependencies: str2vec.m
 
 % Written by G.M Boynton - Summer of '00
 % Edited by Kelly Chang - February 10, 2017
