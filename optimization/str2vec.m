@@ -21,8 +21,6 @@ function [indx] = str2vec(param, str)
 
 %% Linearize Index for Value(s) to be Fitted in 'param'
 
-str = '(:,:,1)';
-
 if isempty(str)
     indx = 1:numel(param);
 else
