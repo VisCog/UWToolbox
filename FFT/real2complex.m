@@ -9,17 +9,18 @@ function [F,t] = real2complex(Y)
 %   dc       mean value of y
 %   amp      vector of amplitudes (length ceil(length(t)/2))
 %   ph       vector of phases (in degrees, cosine phase)
-%   nt       length of t (needed for myifft)
-
+%   nt       length of t 
+%
 %Outputs:
 %   Y        complex-valued vector in the convention of the output of fft
 %   t        time vector of size y (default is 1:length(y));
 %
 %SEE ALSO    complex2real fft ifft
 
-%4/15/09     Written by G.M. Boynton at the University of Washington
+% Written by G.M. Boynton at the University of Washington - 4/15/09
+% Edited by Kelly Chang - November 27, 2017
 
-
+%% Input Control
 
 F = zeros(1,Y.nt);
 if size(Y.ph,2) == 1
