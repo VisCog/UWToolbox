@@ -1,9 +1,9 @@
-function [frames] = secs2frames(display, seconds)
-% [frames] = secs2frames(display, seconds)
+function [frames] = sec2frame(display, seconds)
+% [frames] = sec2frame(display, seconds)
 %
 % Converts time in seconds to frames by calling:
 %
-% frames = ceil(seconds * display.frameRate)
+% frames = ceil(seconds * display.fr)
 % 
 % Inputs:
 %   display           A structure containing display information (see 
