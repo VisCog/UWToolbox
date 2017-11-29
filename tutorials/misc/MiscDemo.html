@@ -1,0 +1,234 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>MiscDemo.m</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-29"><meta name="DC.source" content="MiscDemo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>MiscDemo.m</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">nansem.m</a></li><li><a href="#2">rmspace.m</a></li><li><a href="#3">timeLeftBar.m</a></li><li><a href="#5">translateTime.m</a></li><li><a href="#6">xls2struct.m</a></li></ul></div><h2>nansem.m<a name="1"></a></h2><p>A function that will calculate the standard error of the mean about a selected dimension of a vector / matrix.</p><pre class="codeinput">x = magic(5)
+sem1 = nansem(x)
+sem2 = nansem(x,2)
+</pre><pre class="codeoutput">
+x =
+
+    17    24     1     8    15
+    23     5     7    14    16
+     4     6    13    20    22
+    10    12    19    21     3
+    11    18    25     2     9
+
+
+sem1 =
+
+    3.2404    3.6056    4.2426    3.6056    3.2404
+
+
+sem2 =
+
+    3.9370
+    3.2404
+    3.6056
+    3.2404
+    3.9370
+
+</pre><h2>rmspace.m<a name="2"></a></h2><p>A helpful function that will remove all spaces / whitespace characters from a string or a cell array of strings</p><pre class="codeinput">out = rmspace(<span class="string">'4 6  34 cat'</span>) <span class="comment">% string</span>
+out = rmspace({<span class="string">'H e l       lo   '</span>, <span class="string">'        W  or  ld'</span>}) <span class="comment">% cell array</span>
+</pre><pre class="codeoutput">
+out =
+
+4634cat
+
+
+out = 
+
+    'Hello'    'World'
+
+</pre><h2>timeLeftBar.m<a name="3"></a></h2><p>A variant of the wait bar. Displays real time left instead of progress left.</p><pre class="codeinput">n = 1000;
+<span class="keyword">for</span> i = 1:n
+    <span class="comment">% === computation here === %</span>
+    rand(2000);
+    timeLeftBar(i, n, <span class="string">'message'</span>);
+<span class="keyword">end</span>
+</pre><p><img vspace="5" hspace="5" src="timeLeftBarExample.png" alt=""> </p><h2>translateTime.m<a name="5"></a></h2><p>A convenient function that implements the <a href="http://www.translatingtime.net">Workman Time Translation Model</a> to translate time across species. Currently, the function is able to translate for rat, ferret, and human post-conception (pc) or post-natal (pn) days.</p><pre class="codeinput">translateTime(<span class="string">'rat'</span>, 2, <span class="string">'pc'</span>);
+</pre><pre class="codeoutput">
+Using Post-Conception (PC) Days:
+
+Event Score = -0.95
+
+RAT:	PC = 2, PN = -19
+FERRET:	PC = 2, PN = -39
+HUMAN:	PC = 1, PN = -269
+</pre><h2>xls2struct.m<a name="6"></a></h2><p>A function that reads Microsoft Excel spreadsheets and returns a structure with fields that were the headers of the data. Can handle worksheets with headers:</p><p><img vspace="5" hspace="5" src="headersExample.png" alt=""> </p><pre class="codeinput">s = xls2struct(<span class="string">'xls2structExample.xlsx'</span>, <span class="string">'headers'</span>)
+s.header1
+</pre><pre class="codeoutput">
+s = 
+
+    header1: [7x1 double]
+    header2: [7x1 double]
+    header3: {7x1 cell}
+    header4: [7x1 double]
+    header5: {7x1 cell}
+
+
+ans =
+
+     4
+     5
+     6
+     6
+     7
+     7
+     5
+
+</pre><p>or no headers:</p><p><img vspace="5" hspace="5" src="noHeadersExample.png" alt=""> </p><pre class="codeinput">s = xls2struct(<span class="string">'xls2structExample.xlsx'</span>, <span class="string">'noheaders'</span>)
+s.header1
+</pre><pre class="codeoutput">
+s = 
+
+    header1: [8x1 double]
+    header2: [8x1 double]
+    header3: {8x1 cell}
+    header4: [8x1 double]
+    header5: {8x1 cell}
+
+
+ans =
+
+     4
+     5
+     6
+     6
+     7
+     5
+     6
+     6
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% MiscDemo.m
+%
+
+%% nansem.m
+% 
+% A function that will calculate the standard error of the mean about a
+% selected dimension of a vector / matrix.
+
+x = magic(5)
+sem1 = nansem(x) 
+sem2 = nansem(x,2)
+
+%% rmspace.m
+%
+% A helpful function that will remove all spaces / whitespace characters
+% from a string or a cell array of strings
+
+out = rmspace('4 6  34 cat') % string
+out = rmspace({'H e l       lo   ', '        W  or  ld'}) % cell array
+
+%% timeLeftBar.m
+%
+% A variant of the wait bar. Displays real time left instead of progress
+% left.
+
+n = 1000;
+for i = 1:n
+    % === computation here === %
+    rand(2000);
+    timeLeftBar(i, n, 'message');
+end
+
+%%
+% 
+% <<timeLeftBarExample.png>>
+
+%% translateTime.m
+%
+% A convenient function that implements the 
+% <http://www.translatingtime.net Workman Time Translation Model> to 
+% translate time across species. Currently, the function is able to 
+% translate for rat, ferret, and human post-conception (pc) or post-natal
+% (pn) days.
+
+translateTime('rat', 2, 'pc');
+
+%% xls2struct.m
+% 
+% A function that reads Microsoft Excel spreadsheets and returns a
+% structure with fields that were the headers of the data. Can handle
+% worksheets with headers:
+%
+% <<headersExample.png>>
+
+s = xls2struct('xls2structExample.xlsx', 'headers')
+s.header1
+
+%%
+% or no headers:
+%
+% <<noHeadersExample.png>>
+
+s = xls2struct('xls2structExample.xlsx', 'noheaders')
+s.header1
+##### SOURCE END #####
+--></body></html>
