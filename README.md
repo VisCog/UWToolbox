@@ -10,7 +10,26 @@ Kelly is currently in charge of organizing this toolbox, so email her if you hav
 
 Collection HTML rendered tutorials for various implementations of toolbox scripts.
 
+[misc](http://htmlpreview.github.io/?https://github.com/VisCog/UWToolbox/blob/master/tutorials/misc/MiscDemo.html)
+
 [optimization](http://htmlpreview.github.io/?https://github.com/VisCog/UWToolbox/blob/master/tutorials/optimization/FitDemo.html)
+
+---
+
+# misc
+
+nansem.m -  Calculates the standard error of the mean while ignoring NaNs.
+
+rmspace.m - Removes all whitespace in a string or a cell array.
+
+timeLeftBar.m -  Creates and displays a real time based wait bar (instead of progress based).
+
+translateTime.m -  Implements the [Workman Translating Time Model](http://www.translatingtime.net/) to translate time across species
+
+xls2struct.m -  Reads Microsoft Excel spreadsheet and returns a structure with fields that were the headers of the data or creates headers for the data
+- Example file: xls2structExample.xlsx
+
+MiscDemo.m - raw misc folder tutorial script
 
 ---
 
