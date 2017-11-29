@@ -68,21 +68,16 @@ Support Function / Dependencies:
 
 # stimulus
 
-[OpenWindow.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/OpenWindow.m)
- - Calls the Psychtoolbox command Screen('OpenWindow') using a structure convention.
+[OpenWindow.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/OpenWindow.m) - Calls the Psychtoolbox command Screen('OpenWindow') using a structure convention.
 
 [DrawFixation.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/DrawFixation.m)
  - Draws a fixation point (smaller square inside a larger square) in the center of the screen.
 
-[angle2pix.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/angle2pix.m)
- - Converts visual angles in degrees to pixels.
-[pix2angle.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/pix2angle.m)
- - Converts monitor pixels into degrees of visual angle.
+[angle2pix.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/angle2pix.m) - Converts visual angles in degrees to pixels.
+[pix2angle.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/pix2angle.m) - Converts monitor pixels into degrees of visual angle.
 
-[sec2frame.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/sec2frame.m)
- - Converts time in seconds to frames.
-[frame2sec.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/frame2sec.m)
- - Converts number of frames to time in seconds.
+[sec2frame.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/sec2frame.m) - Converts time in seconds to frames.
+[frame2sec.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/frame2sec.m) - Converts number of frames to time in seconds.
 
 [waitTill.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/waitTill.m) - Waits for a specified amount of time from a starting time. Returns the keys and reaction time pressed during the waiting period.
 [wait4key.m](https://githubcom/VisCog/UWToolbox/blob/master/stimulus/wait4key.m) - Waits for the any specified 'keys' to be pressed.
