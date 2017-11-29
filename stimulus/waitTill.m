@@ -11,7 +11,7 @@ function [keys,RT] = waitTill(waitTime, startTime, deviceNum)
 % Inputs:
 %   waitTime        Interval to wait, seconds. If called without 
 %                   'startTime', will wait 'waitTime'. If called with a
-%                   'startTime', will wait
+%                   'startTime', will wait since 'startTime'
 % 
 %   startTime       Reference time for 'waitTime' interval, seconds
 %                   (default: when 'waitTill' is called)
@@ -47,10 +47,10 @@ end
 
 % give a warning if the waiting interval is zero or less
 if (GetSecs()-startTime) > waitTime
-    disp('Warning! waitTill: waiting interval is less than zero')
+    warning('''waitTill'' interval is less than zero (%.2f)', waitTime);
 end
 
-%% Start WaitTill Process
+%% Start Wait Till Process
 
 ListenChar(2); % suppress output to the command window
 
