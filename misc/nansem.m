@@ -1,49 +1,61 @@
-function Y=nansem(x, varargin)
-%NANSEM Standard error of the mean, ignoring NaNs.
-%   Y = NANSEM(X) returns the sample standard error of the values in X,
-%   treating NaNs as missing values.  For a vector input, Y is the standard
-%   error of the non-NaN elements of X.  For a matrix input, Y is a row
-%   vector containing the standard error of the non-NaN elements in
-%   each column of X. For N-D arrays, NANSEM operates along the first
-%   non-singleton dimension of X.
+function [Y] = nansem(x, dim, flag)
+% [Y] = nansem(x, dim, flag)
+% 
+% Calculates the standard error of the mean while ignoring NaNs.
+% The sample standard error of the values in X is calculated by treating
+% NaNs as missing values. 
 %
-%   NANSEM normalizes Y by (N-1), where N is the sample size.  This is the
-%   square root of an unbiased estimator of the variance of the population
-%   from which X is drawn, as long as X consists of independent, identically
-%   distributed samples and data are missing at random.
+% NANSEM normalizes Y by (N-1), where N is the sample size.  This is the
+% square root of an unbiased estimator of the variance of the population
+% from which X is drawn, as long as X consists of independent, identically
+% distributed samples and data are missing at random.
 %
-%   Y = NANSEM(X,1) normalizes by N and produces the square root of the
-%   second moment of the sample about its mean.  NANEM(X,0) is the same as
-%   NANSEM(X).
+% Inputs:
+%   x           A vector or matrix of numeric value, upon which the 
+%               standard error of the mean will be calculated.
+%   
+%   dim         The dimension along which the standard error of the mean
+%               will be calculated in X (default: first non-singleton 
+%               dimension)
 %
-%   Y = NANSEM(X,FLAG,DIM) takes the standard deviation along dimension
-%   DIM of X.
+%   flag        Boolean flag indicating whether to normalize by N and
+%               produces the square root of the second moment of the sample 
+%               about its mean (default: false)
 %
-%   See also STD, NANVAR, NANMEAN, NANMEDIAN, NANMIN, NANMAX, NANSUM,
-%   NANSTD
+% Output: 
+%   Y           The sample standard error of the values in X along the 
+%               selected dimension, treating NaNs as missing values 
 
-%   Written Geoffrey Boynton, edited Ione Fine
+% Written Geoffrey Boynton, edited Ione Fine
+% Edited by Kelly Chang - November 28, 2017
 
-sz = size(x);
-if nargin < 2 || isempty(dim)
-    % The output size for [] is a special case when DIM is not given.
-    if isequal(x,[]), y = NaN('like',x); return; end
-    
-    % Figure out which dimension sum will work along.
-    dim = find(sz ~= 1, 1);
-    if isempty(dim), dim = 1; end
-elseif dim > length(sz)
-    sz(end+1:dim) = 1;
+%% Input Control
+
+if ~exist('x', 'var') || isempty(x)
+    Y = NaN('like', []); return;
 end
 
-% Need to tile the mean of X to center it.
-tile = ones(size(sz));
-tile(dim) = sz(dim);
+if ~exist('flag', 'var') || isempty(flag)
+    flag = false;
+end
 
-% Count up non-NaNs.
-n = sum(~isnan(x),dim);
+sz = size(x);
+if ~exist('dim', 'var') || isempty(dim)
+    dim = find(sz ~= 1, 1); % non-singleton dimension
+end
 
-Y = sqrt(nanvar(varargin{:}))/n;
+if dim > ndims(x)
+    dim = find(sz ~= 1, 1);
+    warning('Dimension selected exceeds given input dimensions\nFirst non-singleton dimension selected');
+end
 
-end % function
+%% Calculate Standard Error of the Mean (ignoring NaNs)
 
+% standard deviation of non NaN values along selected dimension
+s = nanstd(x,flag,dim);
+
+% count of non NaN values along selected dimension
+n = sum(~isnan(x),dim); 
+
+% calculate sem
+Y = s ./ sqrt(n);
