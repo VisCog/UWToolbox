@@ -14,7 +14,9 @@ Collection HTML rendered tutorials for various implementations of toolbox script
 
 [optimization](http://htmlpreview.github.io/?https://github.com/VisCog/UWToolbox/blob/master/tutorials/optimization/FitDemo.html)
 
-sstimulus (WIP)
+[plotting](http://htmlpreview.github.io/?https://github.com/VisCog/UWToolbox/blob/master/tutorials/plotting/PlotDemo.html)
+
+stimulus (WIP)
 
 ---
 
@@ -46,6 +48,21 @@ Support Function / Dependencies:
 
 FitDemo.m - raw fit/fitcon tutorial script
 - Dependencies: rosenbrock.n
+
+---
+
+# plotting
+
+logx2raw.m - Converts X-axis labels from log to raw values.
+logy2raw.m - Converts Y-axis labels from log to raw values.
+
+widen.m - Speads x-axis limits. Designed to pull extreme data points off of the horizontal axes.
+
+subp.m - Breaks the Figure window into an m-by-n matrix of small axes, selects the p-th axes for the current plot with spacing padding around the axes, and returns the axes handle. A variant of MATLAB's subplot.m but with tighter spacing.
+
+tile.m - Tiles MATLAB figures in the monitor in rows starting at the top-left.
+
+PlotDemo.m - raw plotting tutorial script
 
 ---
 
