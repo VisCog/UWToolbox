@@ -84,10 +84,8 @@ Support Function / Dependencies:
 [frame2sec.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/frame2sec.m)
  - Converts number of frames to time in seconds.
 
-[waitTill.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/waitTill.m)
- - Waits for a specified amount of time from a starting time. Returns the keys and reaction time pressed during the waiting period.
- [wait4key.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/wait4key.m)
- - Waits for the any specified 'keys' to be pressed.
+[waitTill.m](https://github.com/VisCog/UWToolbox/blob/master/stimulus/waitTill.m) - Waits for a specified amount of time from a starting time. Returns the keys and reaction time pressed during the waiting period.
+[wait4key.m](https://githubcom/VisCog/UWToolbox/blob/master/stimulus/wait4key.m) - Waits for the any specified 'keys' to be pressed.
 
 ---
 
