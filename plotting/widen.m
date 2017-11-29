@@ -2,7 +2,7 @@ function widen(p)
 % widen(p)
 %
 % Speads x-axis limits by a proportion p > 1. Designed to pull extreme data
-% points off of the vertical axes.
+% points off of the horizontal axes.
 % 
 % Input:
 %   p          Proportion that scales the current figure's x-axis, numeric

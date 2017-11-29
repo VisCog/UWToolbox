@@ -5,7 +5,7 @@ function tile(m, n, monitor)
 %
 % Inputs:
 %   m         Number of rows of figures 
-%   n         Number of columns (default: Matches aspect ratio of monitor)
+%   n         Number of columns (default: matches aspect ratio of monitor)
 %   monitor   Monitor number, 1 is desktop, 2+ is extended. (default: 
 %             highest available monitor number)
 %
@@ -44,7 +44,7 @@ if monitor > nMonitors
     error('No monitor #%d available', monitor);
 end
 
-%% Get Figures
+%% Get All Figures
 
 figs = get(0,'Children');
 figNum = [figs.Number];

@@ -1,4 +1,4 @@
-function logy2raw(base,precision)
+function logy2raw(base, precision)
 % logy2raw(base, precision)
 %
 % Converts Y-axis labels from log to raw values.
@@ -13,7 +13,8 @@ function logy2raw(base,precision)
 % logx2raw();
 % logy2raw(); % should be tolerant to multiple calls
 %
-% SEE ALSO:   logx2raw.m
+% Note: 
+% - See also: logx2raw.m
 
 % 11/17/96       gmb wrote it.
 % 6/6/96	     gmb added precision argument
@@ -22,7 +23,6 @@ function logy2raw(base,precision)
 %                multiple calls to this function doesn't keep converting
 %                the axis.
 % Edited by Kelly Chang - February 18, 2017
-
 
 %% Input Control
 
@@ -41,4 +41,4 @@ origYTick = get(gca, 'YTick'); % log y-axis labels (raw)
 newYTick = base.^(origYTick); % convert to raw
 newYLabel = arrayfun(@(x) sprintf(precision,x), newYTick, ...
     'UniformOutput', false); % write new y-axis labels
-set(gca, 'YTickLabel', newYLabel);  % set y-axis labels of current graph
+set(gca, 'YTickLabel', newYLabel); % set y-axis labels of current graph

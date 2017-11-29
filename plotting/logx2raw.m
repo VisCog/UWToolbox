@@ -13,7 +13,8 @@ function logx2raw(base, precision)
 % logx2raw();
 % logy2raw(); % should be tolerant to multiple calls
 %
-% SEE ALSO:   logy2raw.m
+% Note:
+% - See also: logy2raw.m
 
 % 11/17/96       gmb wrote it.
 % 6/6/96	     gmb added precision argument

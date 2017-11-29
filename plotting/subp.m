@@ -1,5 +1,5 @@
-function h = subp(m,n,p,spacing)
-% h = subp(nr, nc, j, spacing)
+function [h] = subp(m, n, p, spacing)
+% h = subp(m, n, p, spacing)
 %
 % Breaks the Figure window into an m-by-n matrix of small axes, selects the
 % p-th axes for the current plot with spacing padding around the axes, and
@@ -13,22 +13,22 @@ function h = subp(m,n,p,spacing)
 %   spacing       Padding around the called axes, numeric (default: 0.08)
 %
 % Output:
-%   h             Returns the axes handle of called subplot
+%   h             Returns the axis handle of the called subplot
 
 % Written by G.M. Boynton 
 % Edited by Kelly Chang - March 15, 2017
 
 %% Input Contol
 
-if ~exist('nr', 'var');
+if ~exist('m', 'var');
     m = 1;
 end
 
-if ~exist('nc', 'var');
+if ~exist('n', 'var');
     n = 1;
 end
 
-if ~exist('j', 'var');
+if ~exist('p', 'var');
     p = 1;
 end
 
