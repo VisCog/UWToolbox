@@ -1,0 +1,186 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>PlotDemo.m</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-29"><meta name="DC.source" content="PlotDemo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>PlotDemo.m</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">logx2raw.m &amp; logy2raw.m</a></li><li><a href="#3">widen.m</a></li><li><a href="#5">subp.m</a></li><li><a href="#6">tile.m</a></li></ul></div><h2>logx2raw.m &amp; logy2raw.m<a name="1"></a></h2><p>These two functions will replot logarithmic X-axis and Y-axis labels from the log scale of the data...</p><pre class="codeinput">x = linspace(-3,0,11);
+
+figure(1); clf;
+plot(log(x), log(x.^2));
+xlabel(<span class="string">'log(x)'</span>);
+ylabel(<span class="string">'log(y)'</span>);
+</pre><pre class="codeoutput">Warning: Imaginary parts of complex X and/or Y arguments ignored 
+</pre><img vspace="5" hspace="5" src="PlotDemo_01.png" alt=""> <p>..to the raw data scale, just spaced out in logarithmic steps.</p><pre class="codeinput">figure(2); clf;
+plot(log(x), log(x.^2));
+logx2raw();
+logy2raw(); <span class="comment">% should be tolerant to multiple calls</span>
+xlabel(<span class="string">'Raw x'</span>);
+ylabel(<span class="string">'Raw y'</span>);
+</pre><pre class="codeoutput">Warning: Imaginary parts of complex X and/or Y arguments ignored 
+</pre><img vspace="5" hspace="5" src="PlotDemo_02.png" alt=""> <h2>widen.m<a name="3"></a></h2><p>A very commonly graphing problem is when the data at the extreme X-axis ends get squished almost off the graphing area.</p><pre class="codeinput">x = randn(100,1);
+figure(3); clf;
+plot(x);
+</pre><img vspace="5" hspace="5" src="PlotDemo_03.png" alt=""> <p>widen.m essentially 'widens' the X-axis at the extremes.</p><pre class="codeinput">figure(4); clf;
+plot(x);
+widen();
+</pre><img vspace="5" hspace="5" src="PlotDemo_04.png" alt=""> <h2>subp.m<a name="5"></a></h2><p>A variant on MATLAB's subplot.m. The difference is that subp.m allows for a tighters figure spacing (that is custumizable).</p><pre class="codeinput">figure(5); clf;
+ <span class="keyword">for</span> i = 1:12
+   subp(3, 4, i);
+   plot(randn(100,1));
+ <span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="PlotDemo_05.png" alt=""> <h2>tile.m<a name="6"></a></h2><p>MATLAB automatically plots multiple figures on top of each other to the point where clicking and dragging all nth figures to be display-ble is a nightmare. tile.m will figure out the figure sizes and screen configuration that will allow the most graphs to be viewable on one computer monitor.</p><pre class="codeinput"><span class="comment">% for i = 1:12</span>
+<span class="comment">%    figure(i); clf;</span>
+<span class="comment">%    set(gcf, 'MenuBar', 'none', 'Color', 'k');</span>
+<span class="comment">%    text(0, 0, num2str(i), 'FontSize', 64, ...</span>
+<span class="comment">%        'HorizontalAlignment', 'Center', 'Color', 'g');</span>
+<span class="comment">%    set(gca, 'XLim', [-1 1], 'YLim', [-1 1]);</span>
+<span class="comment">%    axis off;</span>
+<span class="comment">%  end</span>
+<span class="comment">%  tile(3,4);</span>
+</pre><p>It was not possible to HTML render the screen via MATLAB, but here is what the computer monitor should look like after running the above chunk of code.</p><p><img vspace="5" hspace="5" src="tile.png" alt=""> </p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% PlotDemo.m
+%
+%
+
+%% logx2raw.m & logy2raw.m
+%
+% These two functions will replot logarithmic X-axis and Y-axis labels from
+% the log scale of the data...
+x = linspace(-3,0,11);
+
+figure(1); clf;
+plot(log(x), log(x.^2));
+xlabel('log(x)');
+ylabel('log(y)');
+
+%%
+%
+% ..to the raw data scale, just spaced out in logarithmic steps.
+
+figure(2); clf;
+plot(log(x), log(x.^2));
+logx2raw();
+logy2raw(); % should be tolerant to multiple calls
+xlabel('Raw x');
+ylabel('Raw y');
+
+%% widen.m
+%
+% A very commonly graphing problem is when the data at the extreme X-axis
+% ends get squished almost off the graphing area.
+
+x = randn(100,1);
+figure(3); clf;
+plot(x); 
+
+%%
+%
+% widen.m essentially 'widens' the X-axis at the extremes.
+
+figure(4); clf;
+plot(x);
+widen();
+
+%% subp.m
+%
+% A variant on MATLAB's subplot.m. The difference is that subp.m allows for
+% a tighters figure spacing (that is custumizable).
+
+figure(5); clf;
+ for i = 1:12
+   subp(3, 4, i);
+   plot(randn(100,1));
+ end
+
+%% tile.m
+%
+% MATLAB automatically plots multiple figures on top of each other to the
+% point where clicking and dragging all nth figures to be display-ble is a
+% nightmare. tile.m will figure out the figure sizes and screen 
+% configuration that will allow the most graphs to be viewable on one
+% computer monitor. 
+
+% for i = 1:12
+%    figure(i); clf;
+%    set(gcf, 'MenuBar', 'none', 'Color', 'k');
+%    text(0, 0, num2str(i), 'FontSize', 64, ...
+%        'HorizontalAlignment', 'Center', 'Color', 'g');
+%    set(gca, 'XLim', [-1 1], 'YLim', [-1 1]);
+%    axis off;
+%  end
+%  tile(3,4);
+
+ %%
+ %
+ % It was not possible to HTML render the screen via MATLAB, but here is
+ % what the computer monitor should look like after running the above chunk
+ % of code.
+ %
+ % <<tile.png>>
+
+##### SOURCE END #####
+--></body></html>
