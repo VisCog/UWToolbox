@@ -1,5 +1,5 @@
-function [display] = drawFixation(display)
-% [display] = drawFixation(display)
+function [display] = DrawFixation(display)
+% [display] = DrawFixation(display)
 %
 % Draws a fixation point (smaller square inside a larger square) in the
 % center of the screen.
