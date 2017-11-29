@@ -1,13 +1,13 @@
 function [ang] = pix2angle(display, pix)
 % [ang] = pix2angle(display, pix)
 %
-% Converts monitor pixels into degrees of visual angle:
+% Converts monitor pixels into degrees of visual angle with the formula:
 %
 % ang = 2 * arctan(sz/(2*dist)) * (180/pi);
 %
-% Inputs:
-%   display             A structure containing display information with 
-%                       fields:
+% Input:
+%   display             A structure containing display information (see 
+%                       OpenWindow.m), must have fields: 
 %       dist            Distance from screen, cm
 %       width           Width of screen, cm
 %       resolution      Screen resolution [width height], pixels

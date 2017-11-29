@@ -3,9 +3,9 @@ function [pix] = angle2pix(display, ang)
 %
 % Converts visual angles in degrees to pixels.
 %
-% Inputs:
-%   display             A structure containing display information with 
-%                       fields:
+% Input:
+%   display             A structure containing display information (see 
+%                       OpenWindow.m), must have fields: 
 %       dist            Distance from screen, cm
 %       width           Width of screen, cm
 %       resolution      Screen resolution [width height], pixels
