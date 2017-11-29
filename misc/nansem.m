@@ -46,7 +46,7 @@ end
 
 if dim > ndims(x)
     dim = find(sz ~= 1, 1);
-    warning('Dimension selected exceeds given input dimensions\nFirst non-singleton dimension selected');
+    warning('Dimension selected exceeds given input dimensions\nFirst non-singleton dimension selected (dim = %d)', dim);
 end
 
 %% Calculate Standard Error of the Mean (ignoring NaNs)
