@@ -1,7 +1,7 @@
 function [out] = rmspace(str)
 % [out] = rmspace(str)
 % 
-% Removes spaces in a string or a cell array.
+% Removes all whitespace in a string or a cell array.
 %
 % Input: 
 %   str          A string or cell array of strings
