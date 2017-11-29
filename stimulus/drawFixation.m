@@ -1,17 +1,16 @@
 function [display] = drawFixation(display)
-% display = drawFixation(display)
+% [display] = drawFixation(display)
 %
-% Inserts a fixation point (smaller square inside a larger square) in the
+% Draws a fixation point (smaller square inside a larger square) in the
 % center of the screen.
 %
-% Can use the field 'fixation' in the display structure, or uses the
-% following default values:
-%
 % Input:
-%   display             A structure containing display information (see
-%                       OpenWindow.m)
+%   display             A structure containing display information (see 
+%                       OpenWindow.m) must have fields:
+%                       * dist, width, resolution, center, bkColor, window
+%
 %       fixation        A structure containing fixation square information
-%                       with fields:
+%                       with fields, optional:
 %           size        Size of fixation square, degrees (default: 0.5)
 %           mask        Size of circular 'mask' that surrounds the
 %                       fixation, degrees (default: 2)
@@ -24,11 +23,10 @@ function [display] = drawFixation(display)
 %
 % Output:
 %   display             Same 'display' structure, but with additional
-%                       fields supplied
+%                       fields filled in
 % 
 % Note: 
-% - Dependencies: <a href="matlab:
-% web('http://psychtoolbox.org/')">Psychtoolbox</a>, angle2pix.m
+% - Dependencies: <a href="matlab: web('http://psychtoolbox.org/')">Psychtoolbox</a>, angle2pix.m
 
 % Written by G.M. Boynton at the University of Washington - 3/26/09
 % Edited by Kelly Chang - February 23, 2017
