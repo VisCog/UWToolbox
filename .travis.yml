@@ -55,4 +55,4 @@ script:
   - octave -q --eval "$ADDPATH_COMMAND $TEST_COMMAND";
 
 after_success:
-  - coveralls
+  - curl --verbose -F json_file=@`pwd`/coveralls.json https://coveralls.io/api/v1/jobs  || echo "Coveralls push failed"
