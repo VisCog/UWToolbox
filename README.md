@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/VisCog/UWToolbox.svg?branch=master)](https://travis-ci.org/VisCog/UWToolbox)
+[![Coverage Status](https://coveralls.io/repos/github/VisCog/UWToolbox/badge.svg?branch=master)](https://coveralls.io/github/VisCog/UWToolbox?branch=master)
+
+
 ## UW Toolbox 
 
 This is a work in progress, more functions / folders will be added as they have been tested and are functional.
