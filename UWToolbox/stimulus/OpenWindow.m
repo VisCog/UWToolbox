@@ -30,7 +30,7 @@ function [display] = OpenWindow(display)
 % Output:
 %   display             Same structure as passed in, but with additional 
 %                       fields filled in:
-%       window          Pointer to window, as returned by
+%       windowPtr       Pointer to window, as returned by
 %                       Screen('OpenWindow'), numeric
 %       fr              Frame rate (hz), as determined by 
 %                       Screen('GetFlipInterval'), numeric
@@ -85,11 +85,11 @@ if display.debug % if debugging
 end
 
 % Open the window
-[display.window,res] = Screen('OpenWindow', display.screen, display.bkColor, ...
+[display.windowPtr,res] = Screen('OpenWindow', display.screen, display.bkColor, ...
     [0 0 display.resolution]);
 
 % Get the display parameters 'fr'
-display.fr = round(1/Screen('GetFlipInterval', display.window)); % Hz
+display.fr = round(1/Screen('GetFlipInterval', display.windowPtr)); % Hz
 
 % Calculate the center of the screen
 [display.center(1),display.center(2)] = RectCenter(res);

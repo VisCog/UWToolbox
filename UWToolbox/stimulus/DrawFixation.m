@@ -65,14 +65,14 @@ rect = cellfun(@(x) x'+repmat(display.center,1,2), ...
     num2cell([-1 -1 1 1]'*sz,1), 'UniformOutput', false);
 
 % Mask (background color)
-Screen('FillOval', display.window, display.bkColor, rect{3});
+Screen('FillOval', display.windowPtr, display.bkColor, rect{3});
 
 % Outer square (default: white)
-Screen('FillRect', display.window, display.fixation.color{1}, rect{1});
+Screen('FillRect', display.windowPtr, display.fixation.color{1}, rect{1});
 
 % Inner square (default: black)
-Screen('FillRect', display.window, display.fixation.color{2}, rect{2});
+Screen('FillRect', display.windowPtr, display.fixation.color{2}, rect{2});
 
 if display.fixation.flip % flip screen
-    Screen('Flip', display.window); 
+    Screen('Flip', display.windowPtr); 
 end
