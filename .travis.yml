@@ -1,0 +1,58 @@
+# Travis-CI does not have first-class support for Octave
+language: generic
+
+sudo: required
+os: linux
+dist: trusty
+
+env:
+  global:
+    - COVERAGE="true"
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - sourceline: 'ppa:octave/stable'
+    packages:
+    - octave
+    - liboctave-dev
+
+# Command to install dependencies
+before_install:
+  # Install MOxUnit one level up
+  - cd ..
+  - git clone https://github.com/MOxUnit/MOxUnit.git
+  - make -C MOxUnit install
+  # Install MOcov, which adds itself to the startup path
+  - if [ "$COVERAGE" = "true" ]; then
+        rm -rf MOcov;
+        git clone https://github.com/MOcov/MOcov.git;
+        make -C MOcov install;
+    fi;
+  # Go back to the repository directory
+  - cd -
+
+install:
+  # Before running the tests, we will have to add our package and our
+  # external dependencies to the octave path
+  - PACKAGE_FOLDER="UWToolbox";
+    ADDPATH_COMMAND="addpath(genpath(fullfile(pwd, '$PACKAGE_FOLDER')));";
+    echo "ADDPATH_COMMAND| $ADDPATH_COMMAND";
+
+before_script:
+  # Build the moxunit command, which runs on the 'tests' folder
+  - TEST_ARGS="'-recursive', '-verbose', '-junit_xml_file', 'testresults.xml'";
+    if [ "$COVERAGE" = "true" ]; then
+        TEST_ARGS+=", '-with_coverage', '-cover', '$PACKAGE_FOLDER'";
+        TEST_ARGS+=", '-cover_xml_file', 'coverage.xml'";
+        TEST_ARGS+=", '-cover_json_file', 'coveralls.json'";
+    fi;
+    TEST_COMMAND="exit(~moxunit_runtests('tests', $TEST_ARGS));";
+    echo "TEST_COMMAND| $TEST_COMMAND";
+
+script:
+  - octave -q --eval "$ADDPATH_COMMAND $TEST_COMMAND";
+
+after_success:
+  - curl --verbose -F json_file=@`pwd`/coveralls.json https://coveralls.io/api/v1/jobs  || echo "Coveralls push failed"
