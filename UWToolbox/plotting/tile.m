@@ -76,7 +76,7 @@ dy = round((sz(2))/m);
 
 x = 1:dx:(sz(1)+1);
 y = 1:dy:(sz(2)+1);
-xy = CombVec(x(1:n), fliplr(y(1:m)), dx, dy)';
+xy = combvec(x(1:n), fliplr(y(1:m)), dx, dy)';
 xy = xy(1:length(figs),:);
 for i = 1:length(figs)
     set(figs(id(i)), 'Units', 'Pixels', 'OuterPosition', xy(i,:));
