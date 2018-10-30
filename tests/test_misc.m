@@ -29,18 +29,6 @@ end
 %   identifier).
 % More info: https://github.com/MOxUnit/MOxUnit
 
-function [Y] = nansem(x, dim, flag)
-% [Y] = nansem(x, dim, flag)
-% 
-% Calculates the standard error of the mean while ignoring NaNs.
-% The sample standard error of the values in X is calculated by treating
-% NaNs as missing values. 
-%
-% NANSEM normalizes Y by (N-1), where N is the sample size.  This is the
-% square root of an unbiased estimator of the variance of the population
-% from which X is drawn, as long as X consists of independent, identically
-% distributed samples and data are missing at random.
-
 
 function test_nansem()
     assertEqual(nansem([4 6 NaN 8 10 12]), std([4 6 8 10 12])/sqrt(5))
