@@ -29,12 +29,6 @@ end
 %   identifier).
 % More info: https://github.com/MOxUnit/MOxUnit
 
-
-function test_nansem()
-    assertEqual(nansem([4 6 NaN 8 10 12]), std([4 6 8 10 12])/sqrt(5))
-end
-
-
 function test_rmspace()
     % rmspace should work for strings and arrays:
     assertEqual(rmspace('4 6  34 cat'), '4634cat')
