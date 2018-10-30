@@ -32,7 +32,7 @@ function [display] = OpenWindow(display)
 %                       fields filled in:
 %       windowPtr       Pointer to window, as returned by
 %                       Screen('OpenWindow'), numeric
-%       fr              Frame rate (hz), as determined by 
+%       frameRate       Frame rate (hz), as determined by 
 %                       Screen('GetFlipInterval'), numeric
 %       center          A vector of the screen [x y] center in pixels 
 %
@@ -54,7 +54,7 @@ if ~isfield(display, 'screen')
     display.screen = max(Screen('Screens'));
 end
 
-if ~isfield(display, 'resolution');
+if ~isfield(display, 'resolution')
     tmp = Screen('Resolution', display.screen);
     display.resolution = [tmp.width tmp.height];
 end 
@@ -88,8 +88,8 @@ end
 [display.windowPtr,res] = Screen('OpenWindow', display.screen, display.bkColor, ...
     [0 0 display.resolution]);
 
-% Get the display parameters 'fr'
-display.fr = round(1/Screen('GetFlipInterval', display.windowPtr)); % Hz
+% Get the display parameters 'frameRate'
+display.frameRate = round(1/Screen('GetFlipInterval', display.windowPtr)); % Hz
 
 % Calculate the center of the screen
 [display.center(1),display.center(2)] = RectCenter(res);
