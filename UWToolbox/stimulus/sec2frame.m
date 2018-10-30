@@ -3,12 +3,12 @@ function [frames] = sec2frame(display, seconds)
 %
 % Converts time in seconds to frames by calling:
 %
-% frames = ceil(seconds * display.frameRate)
+% frames = ceil(seconds * display.fr)
 % 
 % Inputs:
 %   display           A structure containing display information (see 
 %                     OpenWindow.m), must have field:
-%       frameRate     Frame rate in Hz, as determined by
+%       fr            Frame rate in Hz, as determined by
 %                     Screen('GetFlipInterval'), numeric
 % 
 %   seconds           Time in seconds to be converted to frames, seconds
@@ -22,4 +22,4 @@ function [frames] = sec2frame(display, seconds)
 
 %% Convert Seconds to Frames
 
-frames = ceil(seconds * display.frameRate);
+frames = ceil(seconds * display.fr);
